@@ -1,0 +1,14 @@
+{
+  "appName": {
+	"message": "Suche Geocaching Trackables",
+	"description": "Search Geocaching Trackables"
+  },
+  "appDesc": {
+	"message": "Suche nach Geocaching Trackables Dass Sie Gefunden in eine Geocache oder bei einer Veranstaltung mit einer einfachen Zu Erweiterung",
+	"description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension"
+  },
+  "appTitle": {
+	"message": "Suche Geocaching Trackables", 
+	"description":"Search Geocaching Trackables"
+  }
+}
