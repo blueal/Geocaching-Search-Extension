@@ -1,6 +1,6 @@
 {
 	"name": "Search Geocaching Trackables",
-	"version": "0.2",
+	"version": "0.3",
 	"manifest_version": 2,
 	"description": "Search for Geocaching Trackables",
 	"browser_action": {
@@ -8,7 +8,7 @@
 		"default_title": "Search for Geocaching Trackable",
 		"default_popup": "extension.html"
 	},
-	"content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'",
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 	"icons": {
 		"16": "icon16.png"
 ,	"48": "icon48.png",	"128": "icon128.png"	}
