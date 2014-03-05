@@ -1,6 +1,6 @@
 {
 	"name": "Search Geocaching Trackables",
-	"version": "0.3",
+	"version": "0.3.1",
 	"manifest_version": 2,
 	"description": "Search for Geocaching Trackables",
 	"browser_action": {
