@@ -1,37 +1,33 @@
 *{
 	font-family:"Open Sans", Arial, sans-serif;
 	margin:0;
-	padding:0
-}
-img{
-	max-width:100%
-}
-.collapse{
-	margin:0!important;
-	padding:0
-}
-#body{
+	padding:0;
 	-webkit-font-smoothing:antialiased;
 	-webkit-text-size-adjust:none;
-	width:250px;
-	height:100%
-	-webkit-touch-callout: none;
+}
+body#body{
 	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	width:250px;
+	height:100%;
 }
-#bodyPOP{
-	-webkit-font-smoothing:antialiased;
-	-webkit-text-size-adjust:none;
-	text-align:center;
+/*Global container formatting*/
+.content{
+	padding:10px;  /*This is The Margin around everything*/
+	display:block!important;
+	max-width:100%!important;
+	clear:both!important;
+	margin:0 auto!important
 }
+/*
 .f{
-	position:relative
+	Form Formatting
+	position:relative;
+
 }
+*/
 form{
-	margin:0 0 0.5em
+	margin:0 0 0.5em;
+	position:relative;
 }
 input{
 	display:block;
@@ -40,69 +36,55 @@ input[type=search]{
 	width:100%;
 	position:relative;
 	top:0;
+	outline: none;	
 	padding:.7em 4.8em .7em .7em;
 	/*The second number above adjusts the X button*/
 }
+/*Submit Button*/
 input[type=submit]{
 	position:absolute;
 	right:.75em;
 	top:.5em;
 	bottom:.5em;
 	z-index:1;
-	width:absolute;
-	cursor:pointer;
 	background-color:#000;
-	padding:3px;
-	border:2px solid #262626;
+	padding:4.5px 5px 5.5px 5px;
+	/*border:0px solid #262626;*/
+	border-radius: 3px;
+	border:none;
 	text-align:center;
 	cursor:pointer;
 	text-decoration:none;
 	display:inline-block;
 	color:#FFF;
 
+
 }
-/*The above styling and next 2 are the same object*/
 .btn:hover {
 	background-color:#2B2B2B;
 }
+/*This CSS section made the button malfunction
+
 .btn:active {
 	position:relative;
 	top:1px;
 }
-a{
-	color:#2BA6CB
-}
-p.callout{
-	background-color:#000;
-	margin-bottom:15px;
-	color:#FFF;
-	width:120px;
-	text-transform:uppercase;
-	padding:10px
-}
-.callout a{
-	color:#FFF;
-	text-decoration:none;
-	font-size:80%
-}
-.header.container table td.label{
-	padding:15px 15px 15px 0
-}
-table.footer-wrap{
-	width:100%;
-	clear:both!important
-}
-.footer-wrap .container td.content p{
-	border-top:1px solid #d7d7d7;
-	padding-top:15px;
-	font-size:10px;
-	font-weight:700
+
+*/
+span#status{
+	padding-right:3px;
+	padding-top:4px;
+	cursor:default;
+	text-align:right;
+	font-weight:400;
+	font-size:11px;
+	line-height:1.4;
+	color:#777;
+	font-style:italic;
+	float:right;
 }
 
-h5 a{
-	text-decoration:none
-}
-
+/* Ye Old Footer, visible in the early versions
 p#footer{
 	margin-bottom:0px;
 	margin-left:5px;
@@ -124,18 +106,9 @@ p,ul{
 	color:#777;
 	font-style:italic;
 }
-span#status{
-	padding-top:5px;
-	cursor:default;
-	text-align:right;
-	font-weight:400;
-	font-size:11px;
-	line-height:1.4;
-	color:#777;
-	font-style:italic;
-	float:right;
-}
+*/
 
+/* Ye Old Save Button
 #save{
 	background-color:#575757;
 	border:1px solid #dcdcdc;
@@ -157,7 +130,12 @@ span#status{
 	position:relative;
 	top:1px;
 }
+*/
 
+/*Popup Stuff*/
+#bodyPOP{
+	text-align:center;
+}
 .myButton {
 	-moz-box-shadow:inset 0px 0px 3px 0px #2e0d0d;
 	-webkit-box-shadow:inset 0px 0px 3px 0px #2e0d0d;
@@ -182,6 +160,7 @@ span#status{
 	padding:6px 100px;
 	text-decoration:none;
 	text-shadow:0px -1px 0px #030303;
+	-webkit-user-select: none;
 }
 .myButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #808080), color-stop(1, #000000));
@@ -200,7 +179,7 @@ span#status{
 	cursor:progress;
 }
 
-#POPgc{
+body#POPgc{
 	font-size:17px;
 }
 div#selected{
@@ -211,46 +190,4 @@ div#selected{
 	font-size:15px;
 	color:#777;
 	font-style:italic;
-}
-p.lead{
-	font-size:17px
-}
-p.last{
-	margin-bottom:0
-}
-.container{
-	display:block!important;
-	max-width:100%!important;
-	clear:both!important;
-	margin:0 auto!important
-}
-.content{
-	max-width:100%;
-	display:block;
-	margin:0 auto;
-	padding:10px
-}
-.column{
-	width:300px;
-	float:left
-}
-.column-wrap{
-	max-width:600px!important;
-	margin:0 auto;
-	padding:0!important
-}
-.social .column{
-	width:280px;
-	min-width:279px;
-	float:left
-}
-.clear{
-	display:block;
-	clear:both
-}
-table.head-wrap,table.body-wrap,.content table,.column table{
-	width:100%
-}
-.header.container table td.logo,.column tr td{
-	padding:15px
 }

@@ -3,16 +3,14 @@ function translateHTML() {
 	var lang = window.navigator.language;
 	localStorage["identified_language"] = lang;
 	console.log('Your browser Identified Its language as "' + lang + '". If this is wrong, check your language setting.');
-	document.getElementById("save").innerHTML = chrome.i18n.getMessage("button_html");
-	var element2 = document.getElementById("SearchButton");
-	element2.setAttribute('Value', chrome.i18n.getMessage("SearchButton_html"));
+	document.getElementById("SearchButton").setAttribute('Value', chrome.i18n.getMessage("SearchButton_html"));
 }
 
 document.addEventListener('DOMContentLoaded', translateHTML, true);
 
 /*
-Turn off Text Wrap
-
+*Turn off Text Wrap
+*
  _____                           _     _               _____ _                                _____     _                 _             
 |  __ \                         | |   (_)             /  __ \ |                              |  ___|   | |               (_)            
 | |  \/ ___  ___   ___ __ _  ___| |__  _ _ __   __ _  | /  \/ |__  _ __ ___  _ __ ___   ___  | |____  _| |_ ___ _ __  ___ _  ___  _ __  

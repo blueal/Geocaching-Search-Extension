@@ -4,6 +4,7 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> 
 	<link href='style.css' rel='stylesheet' type='text/css'> 
+	<link rel="shortcut icon" href="favicon.ico">
 
 	<meta name="viewport" content="width=device-width" /> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
@@ -12,7 +13,8 @@
 	<title>Search Geocaches and Geocaching Trackables</title>
 
 	<base target="_blank">
-	
+
+
 	<script src="extension.js"></script>
 	<script src="analytics.js"></script>
 	
@@ -20,28 +22,18 @@
 
 
 <body bgcolor="#FFF" id="body"> 
-	<table class="body-wrap"> 
-		<tr> 
-			<td class="container"> 
-				<div class="content"> 
-					<div id="pattern" class="pattern"> 					
-						<form id="form" action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank">
-							<input id="InputText" type="search" name="tracker" pattern="[A-Za-z0-9].{2,10}" maxlength="10" spellcheck="false" autocomplete="off" autofocus required/> 
-							<input id="SearchButton" type="submit" class="btn search-submit" value="Search"> 
-						</form>
-						
-							<select id="mode-option">
-								<option value="trackable">Trackable</option>
-								<option value="geocache">Geocache</option>
-							</select>
-							<button id="save"></button><span id="status"></span>						
-					</div>
-				</div> 
-			</td>
-		</tr>  
-	</table> 
-</body>
-
+	<div class="content"> 				
+		<form id="form" action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank">
+			<input id="InputText" type="search" name="tracker" pattern="[A-Za-z0-9].{2,10}" maxlength="10" spellcheck="false" autocomplete="off" autofocus required/> 
+			<input id="SearchButton" type="submit" class="btn search-submit" value="Search"/> 
+		</form>						
+		<select id="mode-option">
+			<option value="trackable">Trackable</option>
+			<option value="geocache">Geocache</option>
+		</select>
+		<span id="status"></span>						
+	</div> 
+</body>	
  	<script src="options.js"></script>
 	<!--Script Must Be At End Of Body Tag To Give Time For HTML To Render-->
 </html>
