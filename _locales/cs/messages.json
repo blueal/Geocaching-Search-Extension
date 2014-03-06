@@ -1,26 +1,26 @@
 {
   "appName": {
-	"message": "Busca Geocaching Trackables",
+	"message": "Hledání Geocaching Trackables",
 	"description": "Search Geocaching Trackables"
   },
   "appDesc": {
-	"message": "Buscar Geocaching Trackables Que Ha Encontrado En Un Geocache O En Un Evento Con Una Extensión",
+	"message": "Hledat Geocaching Trackables, které jste nalezli ve geocache nebo na nějaké akci s snadné rozšíření.",
 	"description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension"
   },
   "appTitle": {
-	"message": "Busca Geocaching Trackables", 
+	"message": "Hledání Geocaching Trackables", 
 	"description":"Search Geocaching Trackables"
    },
   "disclaimer_html": {
-    "message": "Sólo el rastreo y códigos de TB permitido",
+    "message": "Pouze trackovatelný a TB kódy povolena",
 	"description":"Only tracking and TB codes allowed"
   },
   "InputText_html": {
-	"message": "Código de Rastreo",
+	"message": "Trackovací číslo",
 	"description": "Tracking Number"
   },
   "SearchButton_html": {
-	"message": "Busca",
+	"message": "Hledat",
 	"description": "This is the Text that goes in the Search Button"
   }
 }

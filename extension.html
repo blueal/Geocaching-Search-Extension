@@ -9,11 +9,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 
 	<title>Geocaching Trackable Entry</title>
- 
-	<script src="extension.js"></script>
 
 	<base target="_blank">
-
+	
+	<script src="extension.js"></script>
+	
 </head>
 
 
@@ -24,13 +24,10 @@
 				<div class="content"> 
 					<div id="pattern" class="pattern"> 
 						<form action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank"> 
-							<input type="search" name="tracker" placeholder="Tracking Number" maxlength="10"/> 
-							<input type="submit" class="btn search-submit" value="Search"> 
+							<input id="InputText" type="search" name="tracker" placeholder="Tracking Number" maxlength="10"/> 
+							<input id="SearchButton" type="submit" class="btn search-submit" value="Search"> 
 						</form>
-						<div id="disclaimer">
-						<p style="font-size:11px"><em>Only Tracking and TB Codes Allowed</em></p>
-					</div> 
-					
+						<p id="disclaimerSpan"></p>
 				</div> 
 			</td>
 		</tr>  

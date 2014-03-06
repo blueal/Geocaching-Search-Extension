@@ -1,7 +1,7 @@
 {
 	"name": "__MSG_appName__",
 
-	"version": "0.4.1",
+	"version": "0.5.0",
 
 	"manifest_version": 2,
 
@@ -21,8 +21,7 @@
 	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
 	"icons": {
-		"16": "icon16.png"
-,
+		"16": "icon16.png",
 		"48": "icon48.png",
 		"128": "icon128.png"
 	}
