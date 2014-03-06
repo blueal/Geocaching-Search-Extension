@@ -1,26 +1,34 @@
 {
   "appName": {
-	"message": "Busca Geocaching Trackables",
-	"description": "Search Geocaching Trackables"
+	"message": "Buscar Geocachés Y Trackables",
+	"description": "Search Geocaches And Geocaching Trackables"
   },
   "appDesc": {
-	"message": "Buscar Geocaching Trackables Que Ha Encontrado En Un Geocache O En Un Evento Con Una Extensión",
-	"description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension"
+	"message": "Buscar Geocaching trackables o Geocache con un fácil de utilizar la extensión",
+	"description": "Search for Geocaching Trackables or a Geocache With An Easy To Use Extension"
   },
   "appTitle": {
-	"message": "Busca Geocaching Trackables", 
-	"description":"Search Geocaching Trackables"
-   },
-  "disclaimer_html": {
-    "message": "Sólo el rastreo y códigos de TB permitido",
-	"description":"Only tracking and TB codes allowed"
+	"message": "Buscar Geocachés Y Trackables", 
+	"description":"Search Geocaches and Trackables"
   },
-  "InputText_html": {
+  "button_html": {
+    "message": "Fijar",
+	"description":"Set"
+  },
+  "InputTextTB_html": {
 	"message": "Código de Rastreo",
 	"description": "Tracking Number"
   },
+  "InputTextGC_html": {
+	"message": "Código GC",
+	"description": "GC Code"
+  },
   "SearchButton_html": {
 	"message": "Busca",
-	"description": "This is the Text that goes in the Search Button"
+	"description": "Search"
+  },
+  "Status_html": {
+	"message": "Opción Guardado",
+	"description": "Option Saved"
   }
 }

@@ -10,5 +10,25 @@
   "appTitle": {
 	"message": "Zoeken Geocaching Trackables", 
 	"description":"Search Geocaching Trackables"
+   },
+  "button_html": {
+    "message": "Ingesteld",
+	"description":"Set"
+  },
+  "InputTextTB_html": {
+	"message": "Trackingnummer",
+	"description": "Tracking Number"
+  },
+  "InputTextGC_html": {
+	"message": "GC Code",
+	"description": "GC Code"
+  },
+  "SearchButton_html": {
+	"message": "Zoeken",
+	"description": "Search"
+  },
+  "Status_html": {
+	"message": "Optie Opgeslagen",
+	"description": "Option Saved"
   }
 }

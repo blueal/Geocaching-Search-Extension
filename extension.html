@@ -8,30 +8,38 @@
 	<meta name="viewport" content="width=device-width" /> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
 
-	<title>Geocaching Trackable Entry</title>
+	<title>Search Geocaches and Geocaching Trackables</title>
 
 	<base target="_blank">
 	
 	<script src="extension.js"></script>
+	<script src="analytics.js"></script>
 	
 </head>
 
 
-<body bgcolor="#FFF"> 
+<body bgcolor="#FFF" id="body"> 
 	<table class="body-wrap"> 
 		<tr> 
 			<td class="container"> 
 				<div class="content"> 
-					<div id="pattern" class="pattern"> 
-						<form action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank"> 
-							<input id="InputText" type="search" name="tracker" placeholder="Tracking Number" maxlength="10"/> 
+					<div id="pattern" class="pattern"> 					
+						<form id="form" action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank">
+							<input id="InputText" type="search" name="tracker" maxlength="10"/> 
 							<input id="SearchButton" type="submit" class="btn search-submit" value="Search"> 
 						</form>
-						<p id="disclaimerSpan"></p>
+						
+							<select id="mode-option">
+								<option value="trackable">Trackable</option>
+								<option value="geocache">Geocache</option>
+							</select>
+							<button id="save"></button><span id="status"></span>						
+					</div>
 				</div> 
 			</td>
 		</tr>  
 	</table> 
 </body>
+ 	<script src="options.js"></script><!--Script Must Be After Body To Give Time For HTML To Render-->
 </html>
 

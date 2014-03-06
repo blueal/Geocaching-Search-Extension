@@ -10,6 +10,25 @@
   "appTitle": {
     "message": "Rechercher Geocaching Trackables", 
     "description":"The description of the application, displayed in the web store."
+   },
+  "button_html": {
+    "message": "Définir",
+	"description":"Set"
+  },
+  "InputTextTB_html": {
+	"message": "Numéro De Suivi",
+	"description": "Tracking Number"
+  },
+  "InputTextGC_html": {
+	"message": "Código GC",
+	"description": "GC Code"
+  },
+  "SearchButton_html": {
+	"message": "Rechercher",
+	"description": "Search"
+  },
+  "Status_html": {
+	"message": "Option enregistrée",
+	"description": "Option Saved"
   }
-  
 }

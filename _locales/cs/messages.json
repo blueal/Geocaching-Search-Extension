@@ -10,17 +10,25 @@
   "appTitle": {
 	"message": "Hledání Geocaching Trackables", 
 	"description":"Search Geocaching Trackables"
-   },
-  "disclaimer_html": {
+  },
+  "button_html": {
     "message": "Pouze trackovatelný a TB kódy povolena",
 	"description":"Only tracking and TB codes allowed"
   },
-  "InputText_html": {
+  "InputTextTB_html": {
 	"message": "Trackovací číslo",
 	"description": "Tracking Number"
+  },
+  "InputTextGC_html": {
+  "message": "GC Code",
+  "description": "GC Code"
   },
   "SearchButton_html": {
 	"message": "Hledat",
 	"description": "This is the Text that goes in the Search Button"
+  },
+  "Status_html": {
+	"message": "Option Saved",
+	"description": "The Status Next to Set"
   }
 }

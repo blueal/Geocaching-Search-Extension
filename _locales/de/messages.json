@@ -10,17 +10,25 @@
   "appTitle": {
 	"message": "Suche Geocaching Trackables", 
 	"description":"Search Geocaching Trackables"
-   },
-  "disclaimer_html": {
-    "message": "Nur Tracking und TB-Codes erlaubt",
-	"description":"Only tracking and TB codes allowed"
   },
-  "InputText_html": {
+  "button_html": {
+    "message": "Set",
+	"description":"Set"
+  },
+  "InputTextTB_html": {
 	"message": "Trackingnummer",
 	"description": "Tracking Number"
   },
+  "InputTextGC_html": {
+	"message": "GC Code",
+	"description": "GC Code"
+  },
   "SearchButton_html": {
 	"message": "Suche",
-	"description": "This is the Text that goes in the Search Button"
+	"description": "Search"
+  },
+  "Status_html": {
+	"message": "Gespeichert Option",
+	"description": "Option Saved"
   }
 }
