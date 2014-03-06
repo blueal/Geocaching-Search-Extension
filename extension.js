@@ -40,43 +40,5 @@ ______ _                  _
                                       
 
 
-If you found this file you must be very technically inclined or very smart, and I should reward your brilliance with some kind of reward.
-But unfortunately I don't have anything I could give you at the moment so instead I will give you my email (blueal@outlook.com).
-Just send me an email to that address saying that you found this file and I shall make a total promise to give you some kind of gift somehow.
-It will most likely be a Starbucks card though since I do live in Seattle!
-
- *
- .                               :
- .                               |
- .                               |
- .                               |
- .                              :|:
- .                              |||
- .                         _____|||_____
- .                        /=============\
- .                    ---<~~~~~~~~~~~~~~~>---
- .                        \-------------/
- .                         \___________/
- .                           \||:::||/
- .                            ||:::||
- .                            ||:::||
- .                            ||:::||
- .                            ||ooo||
- .                            ||___||
- .                            ||:::||
- .                            ||:::||
- .                            ||:::||
- .                            ||:::||
- .                            ||:::||
- .                           /||:::||\
- .                          / ||:::|| \
- .                         /  ||:::||  \
- .                        /   ||:::||   \
- .                    ___/____||:::||____\____
- .                   /~~~~~~~~~~~~~~~~~~~~~~~~\
- .                  /   |~~~~~~~~|  _____      \
- .                  |   |________| |  |  |     |
- .            ______|______________|__|__|_____|_________
-
-                            SPACE NEEDLE!!!!!
+Somewhere in this extension is a hidden file. If you find it, I will reward you.
 */

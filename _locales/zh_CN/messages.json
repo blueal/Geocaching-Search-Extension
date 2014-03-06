@@ -1,0 +1,42 @@
+{
+   "InputTextGC_html": {
+      "description": "This is the ghost text in the Search field",
+      "message": "GC \u53F7"
+   },
+   "InputTextTB_html": {
+      "description": "This is the ghost text in the Search field",
+      "message": "\u8DDF\u8E2A\u53F7"
+   },
+   "SearchButton_html": {
+      "description": "This is the Text that goes in the Search Button",
+      "message": "\u641C\u7D22"
+   },
+   "Status_html": {
+      "description": "The Status Next to Set",
+      "message": "\u5DE5\u7A0B\u4FDD\u5B58\u5B8C\u6210"
+   },
+   "TitleGC_html": {
+      "description": "Enter A Valid GC Code",
+      "message": "\u8F93\u5165\u4E00\u4E2A\u6709\u6548\u7684 GC \u53F7"
+   },
+   "TitleTB_html": {
+      "description": "Enter A Valid Tracking Number",
+      "message": "\u8F93\u5165\u6709\u6548\u7684\u8FFD\u8E2A\u53F7\u7801"
+   },
+   "appDesc": {
+      "description": "The description of the application, displayed in the web store.",
+      "message": "\u641C\u7D22 Geocaching Trackables \u6216\u8005 Geocache \u548C\u7B80\u5355\u7528\u7684\u62D3\u5C55\u7A0B\u5E8F"
+   },
+   "appName": {
+      "description": "The title of the application, displayed in the web store.",
+      "message": "\u641C\u7D22 Geocaches \u548C Trackables"
+   },
+   "appTitle": {
+      "description": "The description of the application, displayed in the web store.",
+      "message": "\u641C\u7D22 Geocaches \u6216 Geocaching \u8DDF\u8E2A"
+   },
+   "button_html": {
+      "description": "This is the Set Button",
+      "message": "\u4FDD\u5B58"
+   }
+}

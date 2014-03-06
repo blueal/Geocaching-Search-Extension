@@ -1,34 +1,42 @@
 {
-  "appName": {
-	"message": "Hledání Geocaching Trackables",
-	"description": "Search Geocaching Trackables"
-  },
-  "appDesc": {
-	"message": "Hledat Geocaching Trackables, které jste nalezli ve geocache nebo na nějaké akci s snadné rozšíření.",
-	"description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension"
-  },
-  "appTitle": {
-	"message": "Hledání Geocaching Trackables", 
-	"description":"Search Geocaching Trackables"
-  },
-  "button_html": {
-    "message": "Pouze trackovatelný a TB kódy povolena",
-	"description":"Only tracking and TB codes allowed"
-  },
-  "InputTextTB_html": {
-	"message": "Trackovací číslo",
-	"description": "Tracking Number"
-  },
-  "InputTextGC_html": {
-  "message": "GC Code",
-  "description": "GC Code"
-  },
-  "SearchButton_html": {
-	"message": "Hledat",
-	"description": "This is the Text that goes in the Search Button"
-  },
-  "Status_html": {
-	"message": "Option Saved",
-	"description": "The Status Next to Set"
-  }
+   "InputTextGC_html": {
+      "description": "GC Code",
+      "message": "GC k\u00F3du"
+   },
+   "InputTextTB_html": {
+      "description": "Tracking Number",
+      "message": "Sledovac\u00ED \u010D\u00EDslo"
+   },
+   "SearchButton_html": {
+      "description": "Search",
+      "message": "Hledat"
+   },
+   "Status_html": {
+      "description": "The Status Next to Set",
+      "message": "Ulo\u017Eeno"
+   },
+   "TitleGC_html": {
+      "description": "Enter A Valid GC Code",
+      "message": "Zadejte Platn\u00FD K\u00F3d GC K\u00F3du"
+   },
+   "TitleTB_html": {
+      "description": "Enter A Valid Tracking Number",
+      "message": "Zadejte Platn\u00E9 \u010D\u00EDslo Pro Sledov\u00E1n\u00ED"
+   },
+   "appDesc": {
+      "description": "Search for Geocaching Trackables or a Geocache With An Easy To Use Extension",
+      "message": "Hledat Geocaching Trackables nebo geocache s snadn\u00E9 pou\u017Eit\u00ED roz\u0161\u00ED\u0159en\u00ED"
+   },
+   "appName": {
+      "description": "Search Geocaches or Geocaching Trackables",
+      "message": "Hled\u00E1n\u00ED Geocaches Nebo Trackables"
+   },
+   "appTitle": {
+      "description": "Search For Geocaches or Geocaching Trackables",
+      "message": "Hled\u00E1n\u00ED geocaches nebo Geocaching trackables"
+   },
+   "button_html": {
+      "description": "Set not available so I translated Save",
+      "message": "Ulo\u017Eit"
+   }
 }

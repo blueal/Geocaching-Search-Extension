@@ -1,34 +1,42 @@
 {
-  "appName": {
-	"message": "Buscar Geocachés Y Trackables",
-	"description": "Search Geocaches And Geocaching Trackables"
-  },
-  "appDesc": {
-	"message": "Buscar Geocaching trackables o Geocache con un fácil de utilizar la extensión",
-	"description": "Search for Geocaching Trackables or a Geocache With An Easy To Use Extension"
-  },
-  "appTitle": {
-	"message": "Buscar Geocachés Y Trackables", 
-	"description":"Search Geocaches and Trackables"
-  },
-  "button_html": {
-    "message": "Fijar",
-	"description":"Set"
-  },
-  "InputTextTB_html": {
-	"message": "Código de Rastreo",
-	"description": "Tracking Number"
-  },
-  "InputTextGC_html": {
-	"message": "Código GC",
-	"description": "GC Code"
-  },
-  "SearchButton_html": {
-	"message": "Busca",
-	"description": "Search"
-  },
-  "Status_html": {
-	"message": "Opción Guardado",
-	"description": "Option Saved"
-  }
+   "InputTextGC_html": {
+      "description": "GC Code",
+      "message": "C\u00F3digo GC"
+   },
+   "InputTextTB_html": {
+      "description": "Tracking Number",
+      "message": "C\u00F3digo de Rastreo"
+   },
+   "SearchButton_html": {
+      "description": "Search",
+      "message": "Busca"
+   },
+   "Status_html": {
+      "description": "Option Saved",
+      "message": "Opci\u00F3n Guardado"
+   },
+   "TitleGC_html": {
+      "description": "Enter A Valid GC Code",
+      "message": "Introduzca un v\u00E1lido c\u00F3digo GC"
+   },
+   "TitleTB_html": {
+      "description": "Enter A Valid Tracking Number",
+      "message": " Introduzca un n\u00FAmero de seguimiento v\u00E1lido"
+   },
+   "appDesc": {
+      "description": "Search for Geocaching Trackables or a Geocache With An Easy To Use Extension",
+      "message": "Buscar Geocaching trackables o Geocache con un f\u00E1cil de utilizar la extensi\u00F3n"
+   },
+   "appName": {
+      "description": "Search For Geocaches or Trackables",
+      "message": "Buscar Geocach\u00E9s o Trackables"
+   },
+   "appTitle": {
+      "description": "Search For Geocaches or Geocaching Trackables",
+      "message": "Buscar Geocach\u00E9s o Geocaching Trackables"
+   },
+   "button_html": {
+      "description": "Set",
+      "message": "Fijar"
+   }
 }

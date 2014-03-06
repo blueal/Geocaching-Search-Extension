@@ -1,34 +1,42 @@
-﻿{
-  "appName": {
-    "message": "Rechercher Geocaching Trackables",
-    "description": "Search Geocaching Trackables"
-  },
-  "appDesc": {
-    "message": "Rechercher Geocaching traçables que vous avez trouvé dans une cache ou lors d'un événement avec un facile à utiliser extension.", 
-    "description":"Search for Geocaching Trackables that you found in a cache or at an event with an easy to Use Extension"
-  },
-  "appTitle": {
-    "message": "Rechercher Geocaching Trackables", 
-    "description":"The description of the application, displayed in the web store."
+{
+   "InputTextGC_html": {
+      "description": "GC Code",
+      "message": "Code GC"
    },
-  "button_html": {
-    "message": "Définir",
-	"description":"Set"
-  },
-  "InputTextTB_html": {
-	"message": "Numéro De Suivi",
-	"description": "Tracking Number"
-  },
-  "InputTextGC_html": {
-	"message": "Código GC",
-	"description": "GC Code"
-  },
-  "SearchButton_html": {
-	"message": "Rechercher",
-	"description": "Search"
-  },
-  "Status_html": {
-	"message": "Option enregistrée",
-	"description": "Option Saved"
-  }
+   "InputTextTB_html": {
+      "description": "Tracking Number",
+      "message": "Num\u00E9ro De Suivi"
+   },
+   "SearchButton_html": {
+      "description": "Search",
+      "message": "Rechercher"
+   },
+   "Status_html": {
+      "description": "Option Saved",
+      "message": "Option enregistr\u00E9e"
+   },
+   "TitleGC_html": {
+      "description": "Enter A Valid GC Code",
+      "message": "Entrez un code valide GC"
+   },
+   "TitleTB_html": {
+      "description": "Enter A Valid Tracking Number",
+      "message": "Entrez un num\u00E9ro de suivi valide"
+   },
+   "appDesc": {
+      "description": "Search for Geocaching Trackables that you found in a cache or at an event with an easy to Use Extension",
+      "message": "Rechercher Geocaching tra\u00E7ables que vous avez trouv\u00E9 dans une cache ou lors d'un \u00E9v\u00E9nement avec un facile \u00E0 utiliser extension."
+   },
+   "appName": {
+      "description": "Search Geocaching Trackables",
+      "message": "Rechercher Geocaching Trackables"
+   },
+   "appTitle": {
+      "description": "The description of the application, displayed in the web store.",
+      "message": "Rechercher Geocaching Trackables"
+   },
+   "button_html": {
+      "description": "Set",
+      "message": "D\u00E9finir"
+   }
 }

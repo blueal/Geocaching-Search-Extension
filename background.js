@@ -4,7 +4,7 @@ function clickHandlerGC(){
   return function(info, tab) {
     if(info.selectionText.indexOf(" ") != -1) //checks if you included a space in your selection
 	{
-	chrome.windows.create({ url: "/popup/popupGC.html", type: "detached_panel",  top: 250, width: 360, height: 200});
+	chrome.windows.create({ url: "/popup/nospacesGC.html", type: "detached_panel",  top: 250, width: 360, height: 200});
 	localStorage["selected_text"] = info.selectionText; //passing your selection to localStorage so the popup can display the text you selected, It will be immediately deleted on page load
 	}
 	else
@@ -22,7 +22,7 @@ function clickHandlerTB(){
   return function(info, tab) {
     if(info.selectionText.indexOf(" ") != -1)
 	{
-	chrome.windows.create({ url: "/popup/popupTB.html", type: "detached_panel", top: 200, width: 390, height: 200});
+	chrome.windows.create({ url: "/popup/nospacesTB.html", type: "detached_panel", top: 200, width: 390, height: 200});
 	localStorage["selected_text"] = info.selectionText;
 	}
 	else

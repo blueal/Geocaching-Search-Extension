@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head> 
 
@@ -7,7 +7,8 @@
 
 	<meta name="viewport" content="width=device-width" /> 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-
+	<meta name="author" content="Alex Friedberg">
+	
 	<title>Search Geocaches and Geocaching Trackables</title>
 
 	<base target="_blank">
@@ -25,7 +26,7 @@
 				<div class="content"> 
 					<div id="pattern" class="pattern"> 					
 						<form id="form" action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank">
-							<input id="InputText" type="search" name="tracker" maxlength="10"/> 
+							<input id="InputText" type="search" name="tracker" pattern="[A-Za-z0-9].{2,10}" maxlength="10" spellcheck="false" autocomplete="off" autofocus required/> 
 							<input id="SearchButton" type="submit" class="btn search-submit" value="Search"> 
 						</form>
 						
@@ -40,6 +41,8 @@
 		</tr>  
 	</table> 
 </body>
- 	<script src="options.js"></script><!--Script Must Be After Body To Give Time For HTML To Render-->
+
+ 	<script src="options.js"></script>
+	<!--Script Must Be At End Of Body Tag To Give Time For HTML To Render-->
 </html>
 

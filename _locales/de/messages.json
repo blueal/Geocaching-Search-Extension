@@ -1,34 +1,42 @@
 {
-  "appName": {
-	"message": "Suche Geocaching Trackables",
-	"description": "Search Geocaching Trackables"
-  },
-  "appDesc": {
-	"message": "Suche nach Geocaching Trackables Dass Sie Gefunden in eine Geocache oder bei einer Veranstaltung mit einer einfachen Zu Erweiterung",
-	"description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension"
-  },
-  "appTitle": {
-	"message": "Suche Geocaching Trackables", 
-	"description":"Search Geocaching Trackables"
-  },
-  "button_html": {
-    "message": "Set",
-	"description":"Set"
-  },
-  "InputTextTB_html": {
-	"message": "Trackingnummer",
-	"description": "Tracking Number"
-  },
-  "InputTextGC_html": {
-	"message": "GC Code",
-	"description": "GC Code"
-  },
-  "SearchButton_html": {
-	"message": "Suche",
-	"description": "Search"
-  },
-  "Status_html": {
-	"message": "Gespeichert Option",
-	"description": "Option Saved"
-  }
+   "InputTextGC_html": {
+      "description": "GC Code",
+      "message": "GC Code"
+   },
+   "InputTextTB_html": {
+      "description": "Tracking Number",
+      "message": "Trackingnummer"
+   },
+   "SearchButton_html": {
+      "description": "Search",
+      "message": "Suche"
+   },
+   "Status_html": {
+      "description": "Option Saved",
+      "message": "Gespeichert Option"
+   },
+   "TitleGC_html": {
+      "description": "Enter A Valid GC Code",
+      "message": "Geben Sie eine g\u00FCltige GC-Code"
+   },
+   "TitleTB_html": {
+      "description": "Enter A Valid Tracking Number",
+      "message": "Geben Sie eine g\u00FCltige Trackingnummer"
+   },
+   "appDesc": {
+      "description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension",
+      "message": "Suche nach Geocaching Trackables oder einem Geocache mit einer bedienungsfreundlichen Erweiterung"
+   },
+   "appName": {
+      "description": "Search For Geocaches or Trackables",
+      "message": "Suchen nach Geocaches Trackables oder"
+   },
+   "appTitle": {
+      "description": "Search For Geocaches or Geocaching Trackables",
+      "message": "Suche nach Geocaches oder Geocaching Trackables"
+   },
+   "button_html": {
+      "description": "Save",
+      "message": "Retten"
+   }
 }

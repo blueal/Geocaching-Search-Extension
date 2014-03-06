@@ -1,34 +1,42 @@
 {
-  "appName": {
-	"message": "Zoeken Geocaching Trackables",
-	"description": "Search Geocaching Trackables"
-  },
-  "appDesc": {
-	"message": "Zoeken naar Geocaching Trackables Die Je Gevonden Hebt In Een Geocache Of Op Een Evenement met Eeen Eenvoudig Te Gebruiken Toestel",
-	"description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension"
-  },
-  "appTitle": {
-	"message": "Zoeken Geocaching Trackables", 
-	"description":"Search Geocaching Trackables"
+   "InputTextGC_html": {
+      "description": "GC Code",
+      "message": "GC Code"
    },
-  "button_html": {
-    "message": "Ingesteld",
-	"description":"Set"
-  },
-  "InputTextTB_html": {
-	"message": "Trackingnummer",
-	"description": "Tracking Number"
-  },
-  "InputTextGC_html": {
-	"message": "GC Code",
-	"description": "GC Code"
-  },
-  "SearchButton_html": {
-	"message": "Zoeken",
-	"description": "Search"
-  },
-  "Status_html": {
-	"message": "Optie Opgeslagen",
-	"description": "Option Saved"
-  }
+   "InputTextTB_html": {
+      "description": "Tracking Number",
+      "message": "Trackingnummer"
+   },
+   "SearchButton_html": {
+      "description": "Search",
+      "message": "Zoeken"
+   },
+   "Status_html": {
+      "description": "Option Saved",
+      "message": "Optie Opgeslagen"
+   },
+   "TitleGC_html": {
+      "description": "Enter A Valid GC Code",
+      "message": "Voer een geldige GC-Code"
+   },
+   "TitleTB_html": {
+      "description": "Enter A Valid Tracking Number",
+      "message": "Voer een geldige Tracking Nummer"
+   },
+   "appDesc": {
+      "description": "Search for Geocaching Trackables that you found in a geocache or at an event with an easy to use extension",
+      "message": "Zoeken naar Geocaching Trackables Die Je Gevonden Hebt In Een Geocache Of Op Een Evenement met Eeen Eenvoudig Te Gebruiken Toestel"
+   },
+   "appName": {
+      "description": "Search Geocaching Trackables",
+      "message": "Zoeken Geocaching Trackables"
+   },
+   "appTitle": {
+      "description": "Search Geocaching Trackables",
+      "message": "Zoeken Geocaching Trackables"
+   },
+   "button_html": {
+      "description": "Set",
+      "message": "Ingesteld"
+   }
 }
