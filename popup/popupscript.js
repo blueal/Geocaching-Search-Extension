@@ -1,46 +1,27 @@
 /*Pop-up Page Script*/
 
 function LoadOnLoad(){
-	ss = getCookie("selected_text");
+    var ss = chrome.extension.getBackgroundPage().selectedText 
+    //I should be using chrome.runtime.getBackgroundPage instead but it isn't working correctly
+    var element = document.getElementById("selectedtext");
     if(typeof ss === 'undefined')
     {
-        document.getElementById("selectedtext").innerHTML = "Error Retreiving Selection Text"
+        console.warn("Warning: Unable to retreive your selected text")
+        element.setAttribute('class', "error"); 
+        element.innerHTML = "Error Retreiving Selected Text"
     }
     else
     {
-	   document.getElementById("selectedtext").innerHTML = ss
+        //Setting "what you selcted" to what you selected
+        element.innerHTML = ss
+        //deleting variable
+        chrome.extension.getBackgroundPage().selectedText = undefined
     }
 }
 
 
 function close_window(){
 	window.close();
-}
-
-function getCookie(c_name)
-{
-    //All of this just to read a cookie...
-    var c_value = document.cookie;
-    var c_start = c_value.indexOf(" " + c_name + "=");
-    if (c_start == -1)
-    {
-        c_start = c_value.indexOf(c_name + "=");
-    }
-    if (c_start == -1)
-    {
-        c_value = null;
-    }
-    else
-    {
-        c_start = c_value.indexOf("=", c_start) + 1;
-        var c_end = c_value.indexOf(";", c_start);
-        if (c_end == -1)
-        {
-            c_end = c_value.length;
-        }
-        c_value = unescape(c_value.substring(c_start,c_end));
-    }
-    return c_value;
 }
 
 document.querySelector("#closebutton").addEventListener('click', close_window);

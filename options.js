@@ -288,43 +288,41 @@ function fade(elem, dur)
 
 
 /*Just a bit of Error Handling*/
-function ErrorOccured(crtical)
+function ErrorOccured(critical)
 {
-
 	var errors = localStorage['Critical_Error'];
 	if(critical == true)
 	{
-		//Something of epic puportions has occured, This is beyond a critical error
-		alert("!!KABOOM!! The extension has occured a epic failure, please contact the creater of the extension immediately");
-		alert("Seriously, the extension just managed to do something that is impossible");
-		window.location.reload(true);
+		//Something of epic proportions has occurred, This is beyond a critical error
+		alert("!!KABOOM!! The extension has managed to do something that is impossible, the extension will now be reinstalled automatically");
+		chrome.runtime.reload();
 		return;
 	}
 	if(typeof errors === 'undefined')
 	{
-		//1st error ever has occured
+		//1st error ever has occurred
 		localStorage['Critical_Error'] = 1;
 		localStorage['preferred_option'] = "trackable";
-		window.alert("A Crtical Error Has Occured, The Extension Will Now Restart");
+		window.alert("A Crtical Error Has Occurred, The Extension Will Now Restart");
 		window.location.reload(true);
 		return;
 	}
 	else
 	{
-		//An Error Has Occured Before
+		//An Error Has Occurred Before
 		if(errors >= 4)
 		{
 			errors = 0;
 			localStorage['Critical_Error'] = errors;
 			localStorage['preferred_option'] = "trackable";
 			//This is a recurring issue, we need to tell the User to reinstall the extension
-			alert("Something terrible has happened to the Extension. If This Error Is Occurring Regularly, Please Reinstall The Extension");
-			window.location.reload(true);
+			alert("Something terrible has happened to the Extension. The extension will now be reinstalled automatically");
+			chrome.runtime.reload()
 			return;
 		}
 		else
 		{
-			//An Error has occured before but no more then 3 times
+			//An Error has occurred before but no more then 3 times
 			errors++
 			localStorage['Critical_Error'] = errors;
 			localStorage['preferred_option'] = "trackable";

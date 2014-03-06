@@ -24,14 +24,14 @@
 <body bgcolor="#FFF" id="body"> 
 	<div class="content"> 				
 		<form id="form" action="http://www.geocaching.com/track/details.aspx?tracker=" method="get" class="f" target="_blank">
-			<input id="InputText" type="search" name="tracker" pattern="[A-Za-z0-9].{2,10}" maxlength="10" spellcheck="false" autocomplete="off" autofocus required/> 
+			<input id="InputText" role="search" aria-required="true" type="search" name="tracker" pattern="[A-Za-z0-9].{2,10}" maxlength="10" spellcheck="false" autocomplete="off" autofocus required/> 
 			<input id="SearchButton" type="submit" class="btn search-submit" value="Search"/> 
 		</form>						
-		<select id="mode-option">
+		<select role="option" id="mode-option">
 			<option value="trackable">Trackable</option>
 			<option value="geocache">Geocache</option>
 		</select>
-		<span id="status"></span>						
+		<span id="status" role="status"></span>
 	</div> 
 </body>	
  	<script src="options.js"></script>

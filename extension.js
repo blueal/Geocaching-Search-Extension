@@ -1,6 +1,6 @@
 //Translates HTML
 function translateHTML() {
-	var lang = window.navigator.language;
+	var lang = chrome.runtime.getManifest().current_locale;
 	localStorage["identified_language"] = lang;
 	console.log('Your browser Identified Its language as "' + lang + '". If this is wrong, check your language setting.');
 	document.getElementById("SearchButton").setAttribute('Value', chrome.i18n.getMessage("SearchButton_html"));
