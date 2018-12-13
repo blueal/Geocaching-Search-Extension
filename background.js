@@ -21,6 +21,7 @@ function onClickHandler(info, tab) {
 		}
 		else
 		{
+			/*
 			//The size of the window is determinded by the language
 			var lang = localStorage["identified_language"];
 			if(typeof lang === 'undefined')
@@ -44,6 +45,8 @@ function onClickHandler(info, tab) {
 			setTimeout(function(){
 				selectedText = undefined
 			}, 10000);
+			*/
+			window.alert("Invalid");
 			return;
 			
 		}	
@@ -60,6 +63,7 @@ function onClickHandler(info, tab) {
 		}
 		else
 		{
+			/*
 			//The size of the window is determined by the language
 			var lang = localStorage["identified_language"];
 			if(typeof lang === 'undefined')
@@ -84,6 +88,8 @@ function onClickHandler(info, tab) {
 			setTimeout(function(){
 				selectedText = undefined
 			}, 10000);
+			*/
+			window.alert("Invalid");
 			return;
 		} 
 	}
