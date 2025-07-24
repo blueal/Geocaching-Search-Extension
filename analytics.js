@@ -75,3 +75,29 @@ window.addEventListener("load", async () => {
     }),
   });
 });
+
+//Capture the Submission
+//But first we must wait for the page to load because it will error as NULL if we dont
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("SearchButton").addEventListener('click', async () => {
+        fetch(
+        `${GA_ENDPOINT}?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`,
+        {
+            method: 'POST',
+            body: JSON.stringify({
+            client_id: await getOrCreateClientId(),
+            events: [
+                {
+                name: 'search',
+                params: {
+                    session_id: await getOrCreateSessionId(),
+                    engagement_time_msec: DEFAULT_ENGAGEMENT_TIME_IN_MSEC,
+                    id: localStorage["preferred_option"],
+                },
+                },
+            ],
+            }),
+        }
+        );
+    });
+});
