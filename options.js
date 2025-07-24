@@ -161,7 +161,7 @@ function restore_options() {
 function setGC()
 {
 	var element = getId("form");
-	element.setAttribute('action', "http://www.geocaching.com/seek/cache_details.aspx?wp="); 
+	element.setAttribute('action', "https://www.geocaching.com/seek/cache_details.aspx?wp="); 
 	var element = getId("InputText");
 	element.setAttribute('name', "wp"); 
 	element.setAttribute('placeholder', chrome.i18n.getMessage("InputTextGC_html"));
@@ -170,7 +170,7 @@ function setGC()
 function setTB()
 {
 	var element = getId("form");
-	element.setAttribute('action', "http://www.geocaching.com/track/details.aspx?tracker="); 
+	element.setAttribute('action', "https://www.geocaching.com/track/details.aspx?tracker="); 
 	var element = getId("InputText");
 	element.setAttribute('name', "tracker"); 
 	element.setAttribute('placeholder', chrome.i18n.getMessage("InputTextTB_html")); 
