@@ -92,8 +92,8 @@ async function onClickHandler(info, tab) {
 		//GC Click Handler
 		
 		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
-			var url = 'https://www.geocaching.com/seek/cache_details.aspx?wp=' + info.selectionText; //Whoa! There's some URL construction going on here
-			//opens new window 
+			var url = 'https://www.geocaching.com/seek/cache_details.aspx?wp=' + info.selectionText;
+			//opens new tab 
 			chrome.tabs.create({
 				url: url
 			});
@@ -101,32 +101,6 @@ async function onClickHandler(info, tab) {
 		}
 		else
 		{
-			/*
-			//The size of the window is determinded by the language
-			var lang = localStorage["identified_language"];
-			if(typeof lang === 'undefined')
-			{
-				lang = chrome.runtime.getManifest().current_locale;
-			}
-			if(lang == "en_US" || lang == "en_GB" || lang == "en")
-			{
-				//no extra space needed
-				chrome.windows.create({ url: "/popup/selectionerrorGC.html", type: "detached_panel", focused:true, top: 250, width: 360, height: 200});
-			}
-			else
-			{
-				//extra space is needed
-				chrome.windows.create({ url: "/popup/selectionerrorGC.html", type: "detached_panel", focused:true, top: 250, width: 480, height: 260});
-			}
-			//Passing what you selected to a global variable so it can be read by the popup
-			selectedText = info.selectionText;
-
-			//the variable should be deleted within the popup but just in case this will delelte it after 10 seconds
-			setTimeout(function(){
-				selectedText = undefined
-			}, 10000);
-			*/
-			//window.alert("Invalid");
 			return;
 			
 		}	
@@ -137,7 +111,7 @@ async function onClickHandler(info, tab) {
 		/*Checking if you just selected useless garbage*/
 		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
 			var url = 'https://www.geocaching.com/track/details.aspx?tracker=' + info.selectionText;
-			//opens new window 
+			//opens new tab 
 			chrome.tabs.create({
 				url: url
 			});
@@ -145,33 +119,6 @@ async function onClickHandler(info, tab) {
 		}
 		else
 		{
-			/*
-			//The size of the window is determined by the language
-			var lang = localStorage["identified_language"];
-			if(typeof lang === 'undefined')
-			{
-				lang = chrome.runtime.getManifest().current_locale;
-			}
-			if(lang == "en_US" || lang == "en_GB" || lang == "en")
-			{
-				//no extra space needed
-				chrome.windows.create({ url: "/popup/selectionerrorTB.html", type: "detached_panel",  focused: true, top: 250, width: 390, height: 200});
-			}
-			else
-			{
-				//extra space is needed
-				chrome.windows.create({ url: "/popup/selectionerrorTB.html", type: "detached_panel",  focused: true, top: 250, width: 480, height: 260});
-			}
-			//Passing what you selected to a global variable so it can be read by the popup
-			selectedText = info.selectionText;
-			//The popup is supposed to delete the Variable, but just in case it doesn't,
-			//This will delete it after 10 seconds
-			
-			setTimeout(function(){
-				selectedText = undefined
-			}, 10000);
-			*/
-			//window.alert("Invalid");
 			return;
 		} 
 	}

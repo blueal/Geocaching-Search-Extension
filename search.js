@@ -59,7 +59,6 @@ function save_options() {
 			else
 			{
 				//It is EXTREMELY unlikely (if even possible) that you will get to this section of code
-				ErrorOccured();
 				return;
 			}
 		}
@@ -106,12 +105,12 @@ function save_options() {
 		else //impossible to get here as we already checked for this error
 		{
 			//100% impossible to get here
-			ErrorOccured(true);
+
 		}
 	}
-	else //You or something else has fucked with the HTML, reload the page
+	else //You or something else has fucked with the HTML
 	{
-		ErrorOccured();
+
 	}
 }
 
@@ -161,18 +160,14 @@ function restore_options() {
 function setGC()
 {
 	var element = getId("form");
-	element.setAttribute('action', "https://www.geocaching.com/seek/cache_details.aspx?wp="); 
 	var element = getId("InputText");
-	element.setAttribute('name', "wp"); 
 	element.setAttribute('placeholder', chrome.i18n.getMessage("InputTextGC_html"));
 	element.setAttribute('title', chrome.i18n.getMessage("TitleGC_html"));
 }
 function setTB()
 {
 	var element = getId("form");
-	element.setAttribute('action', "https://www.geocaching.com/track/details.aspx?tracker="); 
 	var element = getId("InputText");
-	element.setAttribute('name', "tracker"); 
 	element.setAttribute('placeholder', chrome.i18n.getMessage("InputTextTB_html")); 
 	element.setAttribute('title', chrome.i18n.getMessage("TitleTB_html"));
 }
@@ -286,57 +281,49 @@ function fade(elem, dur)
 	return;
 }
 
+/**
+ * Handles the search
+ * @param {string} gcCode - The search box input.
+ */
+function search(input){
+	const geocacheUrl   = "https://www.geocaching.com/geocache/";
+	const trackableUrl  = "https://www.geocaching.com/track/details.aspx?tracker=";
+	const searchText    = input.trim(); //trim the whitespace for good measure
+	const currentOption = localStorage["preferred_option"];
+	var searchUrl       = "";
+	//Check if it's a geocache or trackable
+	if(currentOption == "geocache"){
+		//Search for GC
+		searchUrl = geocacheUrl + searchText;
+		console.log("Opening Geocache Page to: " + searchUrl)
+	}
+	else if(currentOption == "trackable"){
+		searchUrl = trackableUrl + searchText;
+		console.log("Opening Trackable Page to: " + searchUrl)
+	}
+	else {
+		//Error
+		console.error("Invalid Option Occured When Parsing Current Option in Search Function: " + currentOption)
+		return;
+	}
+	chrome.tabs.create({
+		url: searchUrl
+	});
 
-/*Just a bit of Error Handling*/
-function ErrorOccured(critical)
-{
-	var errors = localStorage['Critical_Error'];
-	if(critical == true)
-	{
-		//Something of epic proportions has occurred, This is beyond a critical error
-		alert("!!KABOOM!! The extension has managed to do something that is impossible, the extension will now be reinstalled automatically");
-		chrome.runtime.reload();
-		return;
-	}
-	if(typeof errors === 'undefined')
-	{
-		//1st error ever has occurred
-		localStorage['Critical_Error'] = 1;
-		localStorage['preferred_option'] = "trackable";
-		window.alert("A Crtical Error Has Occurred, The Extension Will Now Restart");
-		window.location.reload(true);
-		return;
-	}
-	else
-	{
-		//An Error Has Occurred Before
-		if(errors >= 4)
-		{
-			errors = 0;
-			localStorage['Critical_Error'] = errors;
-			localStorage['preferred_option'] = "trackable";
-			//This is a recurring issue, we need to tell the User to reinstall the extension
-			alert("Something terrible has happened to the Extension. The extension will now be reinstalled automatically");
-			chrome.runtime.reload()
-			return;
-		}
-		else
-		{
-			//An Error has occurred before but no more then 3 times
-			errors++
-			localStorage['Critical_Error'] = errors;
-			localStorage['preferred_option'] = "trackable";
-			alert("A Critical Error Has Occured, The Extension Will Now Restart");
-			window.location.reload(true);
-			return;
-		}
-	}
 }
-
 
 /* Event Listeners */
 
-document.addEventListener('DOMContentLoaded', restore_options, true);
-document.querySelector("#mode-option").addEventListener('change', save_options);
-document.querySelector("#InputText").addEventListener('blur', function (){document.getElementById("InputText").focus();}); 
-//The above is so the input box ALWAYS has focus
+document.addEventListener('DOMContentLoaded', () => {
+	restore_options();
+	document.querySelector("#mode-option").addEventListener('change', save_options);
+	document.querySelector("#InputText").addEventListener('blur', function (){document.getElementById("InputText").focus();}); 
+	//The above is so the input box ALWAYS has focus
+	document.getElementById("form").addEventListener('submit', (event) => {
+		// Prevent the default form submission behavior (page reload)
+		event.preventDefault();
+		search(
+			document.getElementById("InputText").value
+		);
+	});
+});
