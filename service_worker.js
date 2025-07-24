@@ -86,15 +86,17 @@ async function runAnalyticsEvent(eventName, eventID) {
 async function onClickHandler(info, tab) {
 
 	//Run some Analytics
-	runAnalyticsEvent("onClickHandler", info.selectionText)
+	runAnalyticsEvent("onClickHandler", info.menuItemId)
 	
 	if (info.menuItemId == "GC") {
 		//GC Click Handler
 		
 		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
-			var url = 'http://www.geocaching.com/seek/cache_details.aspx?wp=' + info.selectionText; //Whoa! There's some URL construction going on here
+			var url = 'https://www.geocaching.com/seek/cache_details.aspx?wp=' + info.selectionText; //Whoa! There's some URL construction going on here
 			//opens new window 
-			window.open(url);
+			chrome.tabs.create({
+				url: url
+			});
 			return;
 		}
 		else
@@ -124,7 +126,7 @@ async function onClickHandler(info, tab) {
 				selectedText = undefined
 			}, 10000);
 			*/
-			window.alert("Invalid");
+			//window.alert("Invalid");
 			return;
 			
 		}	
@@ -134,9 +136,11 @@ async function onClickHandler(info, tab) {
 		
 		/*Checking if you just selected useless garbage*/
 		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
-			var url = 'http://www.geocaching.com/track/details.aspx?tracker=' + info.selectionText;
+			var url = 'https://www.geocaching.com/track/details.aspx?tracker=' + info.selectionText;
 			//opens new window 
-			window.open(url);
+			chrome.tabs.create({
+				url: url
+			});
 			return;
 		}
 		else
@@ -167,7 +171,7 @@ async function onClickHandler(info, tab) {
 				selectedText = undefined
 			}, 10000);
 			*/
-			window.alert("Invalid");
+			//window.alert("Invalid");
 			return;
 		} 
 	}
