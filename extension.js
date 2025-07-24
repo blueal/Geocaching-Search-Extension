@@ -37,6 +37,4 @@ ______ _                  _
 \____/|_|\__,_|\___|\__,_|_|                                                                                                            
                                       
 
-
-Somewhere in this extension is a hidden file. If you find it, I will reward you.
 */

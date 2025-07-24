@@ -1,0 +1,204 @@
+/* This background page has been converted to service worker
+ * as required by manifest v3
+ *
+ * Information about event pages is available here 
+ * http://developer.chrome.com/extensions/event_pages.html
+ */
+
+//var selectedText;
+
+/**runAnalyticsEvent
+ * @param {string} eventName - Name of the Event.
+ * @param {string} eventID - ID of the event.
+ * 
+ * Must remove the "this" from getOrCreateSessionID or else it will error
+ */
+async function runAnalyticsEvent(eventName, eventID) {
+
+	async function getOrCreateClientId() {
+		const result = await chrome.storage.local.get('clientId');
+		let clientId = result.clientId;
+		if (!clientId) {
+			// Generate a unique client ID, the actual value is not relevant
+			clientId = self.crypto.randomUUID();
+			await chrome.storage.local.set({clientId});
+		}
+		return clientId;
+	}
+
+	const SESSION_EXPIRATION_IN_MIN = 30;
+
+	async function getOrCreateSessionId() {
+		// Store session in memory storage
+		let {sessionData} = await chrome.storage.session.get('sessionData');
+		// Check if session exists and is still valid
+		const currentTimeInMs = Date.now();
+		if (sessionData && sessionData.timestamp) {
+			// Calculate how long ago the session was last updated
+			const durationInMin = (currentTimeInMs - sessionData.timestamp) / 60000;
+			// Check if last update lays past the session expiration threshold
+			if (durationInMin > SESSION_EXPIRATION_IN_MIN) {
+			// Delete old session id to start a new session
+			sessionData = null;
+			} else {
+			// Update timestamp to keep session alive
+			sessionData.timestamp = currentTimeInMs;
+			await chrome.storage.session.set({sessionData});
+			}
+		}
+		if (!sessionData) {
+			// Create and store a new session
+			sessionData = {
+			session_id: currentTimeInMs.toString(),
+			timestamp: currentTimeInMs.toString(),
+			};
+			await chrome.storage.session.set({sessionData});
+		}
+		return sessionData.session_id;
+	}
+
+	const GA_ENDPOINT = "https://www.google-analytics.com/mp/collect";
+	const MEASUREMENT_ID = `G-SEYPQDQBKQ`;
+	const API_SECRET = `l1-nLvpRRRqA2_k6xs4Txw`;
+	const DEFAULT_ENGAGEMENT_TIME_IN_MSEC = 100;
+
+	fetch(
+		`${GA_ENDPOINT}?measurement_id=${MEASUREMENT_ID}&api_secret=${API_SECRET}`,
+		{
+			method: "POST",
+			body: JSON.stringify({
+				client_id: await getOrCreateClientId(),
+				events: [
+					{
+						name: eventName,
+						params: {
+							session_id: await getOrCreateSessionId(),
+							engagement_time_msec: DEFAULT_ENGAGEMENT_TIME_IN_MSEC,
+							id: eventID,
+						},
+					},
+				],
+			}),
+		}
+	);
+}
+
+async function onClickHandler(info, tab) {
+
+	//Run some Analytics
+	runAnalyticsEvent("onClickHandler", info.selectionText)
+	
+	if (info.menuItemId == "GC") {
+		//GC Click Handler
+		
+		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
+			var url = 'http://www.geocaching.com/seek/cache_details.aspx?wp=' + info.selectionText; //Whoa! There's some URL construction going on here
+			//opens new window 
+			window.open(url);
+			return;
+		}
+		else
+		{
+			/*
+			//The size of the window is determinded by the language
+			var lang = localStorage["identified_language"];
+			if(typeof lang === 'undefined')
+			{
+				lang = chrome.runtime.getManifest().current_locale;
+			}
+			if(lang == "en_US" || lang == "en_GB" || lang == "en")
+			{
+				//no extra space needed
+				chrome.windows.create({ url: "/popup/selectionerrorGC.html", type: "detached_panel", focused:true, top: 250, width: 360, height: 200});
+			}
+			else
+			{
+				//extra space is needed
+				chrome.windows.create({ url: "/popup/selectionerrorGC.html", type: "detached_panel", focused:true, top: 250, width: 480, height: 260});
+			}
+			//Passing what you selected to a global variable so it can be read by the popup
+			selectedText = info.selectionText;
+
+			//the variable should be deleted within the popup but just in case this will delelte it after 10 seconds
+			setTimeout(function(){
+				selectedText = undefined
+			}, 10000);
+			*/
+			window.alert("Invalid");
+			return;
+			
+		}	
+	}
+	if(info.menuItemId == "TB") {
+		//TB click handler
+		
+		/*Checking if you just selected useless garbage*/
+		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
+			var url = 'http://www.geocaching.com/track/details.aspx?tracker=' + info.selectionText;
+			//opens new window 
+			window.open(url);
+			return;
+		}
+		else
+		{
+			/*
+			//The size of the window is determined by the language
+			var lang = localStorage["identified_language"];
+			if(typeof lang === 'undefined')
+			{
+				lang = chrome.runtime.getManifest().current_locale;
+			}
+			if(lang == "en_US" || lang == "en_GB" || lang == "en")
+			{
+				//no extra space needed
+				chrome.windows.create({ url: "/popup/selectionerrorTB.html", type: "detached_panel",  focused: true, top: 250, width: 390, height: 200});
+			}
+			else
+			{
+				//extra space is needed
+				chrome.windows.create({ url: "/popup/selectionerrorTB.html", type: "detached_panel",  focused: true, top: 250, width: 480, height: 260});
+			}
+			//Passing what you selected to a global variable so it can be read by the popup
+			selectedText = info.selectionText;
+			//The popup is supposed to delete the Variable, but just in case it doesn't,
+			//This will delete it after 10 seconds
+			
+			setTimeout(function(){
+				selectedText = undefined
+			}, 10000);
+			*/
+			window.alert("Invalid");
+			return;
+		} 
+	}
+};
+
+function Startup() {
+	chrome.contextMenus.create({
+	 "title":chrome.i18n.getMessage("InputTextGC_html"),
+	  "contexts":["selection"],
+	  "id": "GC",
+	});  
+	chrome.contextMenus.create({
+	  "title":"Trackable",
+	  "contexts":["selection"],
+	  "id": "TB",
+	});
+	
+	//Setting up some initial settings
+	chrome.storage.local["identified_language"] = chrome.runtime.getManifest().current_locale;
+	chrome.storage.local["preferred_option"] = "trackable";
+
+	//Analytics Startup
+	runAnalyticsEvent("onInstalled", "Startup")
+	
+}
+
+
+//NEW event page event listeners
+chrome.contextMenus.onClicked.addListener(onClickHandler);
+chrome.runtime.onInstalled.addListener(Startup);
+chrome.runtime.onUpdateAvailable.addListener(function (){chrome.runtime.reload;})
+
+
+
