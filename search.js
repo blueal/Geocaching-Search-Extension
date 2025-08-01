@@ -1,182 +1,150 @@
-/*
-*All of this code is for the Option Selection
-*I would comment everything but Im too lazy to do that
-*
-*If you have ANY comments or questions (even not related to this), 
-*contact Geocaching User blueal at "blueal@outlook.com"
-*
-*Use setStatus(Message, Duration) in the javascript console 
-*to make a status message appear!
-*
-*
+/*Persistent Global Variables for SetStatus
+* TODO: Rewrite this function so I don't have to use these annoying variables.
 */
-
-/*Persistent Global Variables*/
 var _number = 0,
 _again = 15,
 _REPEAT = false,
 _running = false,
 _duration;
 
+/**
+ * The URL prefix for searching GC codes
+ * @constant
+ * @type {string}
+ */
+const GEOCACHE_SEARCH_URL  = "https://www.geocaching.com/geocache/";
+
+/**
+ * The URL prefix for searching TB codes
+ * @constant
+ * @type {string}
+ */
+const TRACKABLE_SEARCH_URL = "https://www.geocaching.com/track/details.aspx?tracker=";
+
+/**
+ * Geocache Option ID
+ * @constant
+ * @type {string}
+ */
+const GEOCACHE_OPTION = "geocache"
+
+/**
+ * Trackable Option ID
+ * @constant
+ * @type {string}
+ */
+const TRACKABLE_OPTION = "trackable"
+
+/**
+ * Default Option ID
+ * @constant
+ * @type {string}
+ */
+const DEFAULT_OPTION = TRACKABLE_OPTION
+
+/**
+ * Saved Option Local Storage Location
+ * @constant
+ * @type {string}
+ */
+const OPTION_STORAGE_LOCATION = "preferred_option"
+
+
+
 /*Static Variables*/
 var _DefaultFadeDelay = 2400;
 
 // Saves options to localStorage.
 
-function save_options() {
+async function getOrSetOptionToStorage(option){
+	if(option !== null && option !== undefined && option !== '') {
+		await chrome.storage.local.set({"preferred_option": option});
+	}
+	return await chrome.storage.local.get(["preferred_option"]);
+}
+
+function saveOptions() {
 	select = document.getElementById("mode-option");
-	var mode = select.children[select.selectedIndex].value;  //mode is what you have selected
-	var current_setting = localStorage["preferred_option"];   //current setting saved into local storage
+	var selectedOption = select.children[select.selectedIndex].value;
+	//selectedOption = document.getElementById("mode-option").select.children[select.selectedIndex].value;
+	const savedSetting = getOrSetOptionToStorage();
 
-	if (current_setting == mode) //checks if your setting the option to what its already set to. Which is Impossible Now
-	{
-		//It Is Impossible to run this code now since the "set" button doesn't exist
-		var a = getId("InputText");
-		var a1 = a.getAttribute("name");
-		
-
-		if (a1 == "tracker" && current_setting == "geocache" || a1 == "wp" && current_setting == "trackable")
-		//Checks if current_setting and what is actually set, is out of sync.
-		{
-			//This code will ONLY be run if something terrible has happened to the HTML
-			//Putting this code in was completely unnecessary but I felt like being a good programmer and error proofing my code
-			//Although now I should remove all this since it is impossible to run this section of code
-			localStorage["preferred_option"] = mode
-			setStatus();
-			//Update HTML stuff
-			if (mode == "geocache")
-			{
-				setGC();
-				console.warn("HTML Out of sync, Changed Everything To Option Selected");
-				return;
-			}
-			else if (mode == "trackable")
-			{
-				setTB();
-				console.warn("HTML Is Out Of Sync, Changed Everything To Option Selected");
-				return;
-			}
-			else
-			{
-				//It is EXTREMELY unlikely (if even possible) that you will get to this section of code
-				return;
-			}
-		}
-		else //this is the actual, setting something to something its already set to idiot proofing code.
-		{
-			_number++
-			if (_number == _again) //All of this to make it as user friendly as possible
-			{
-				if (mode == "geocache")
-				{
-					setGC();
-					console.warn("Button is being spammed, finally giving the user what it wanted");
-				}
-				else if (mode == "trackable")
-				{
-					setTB();
-					console.log("Button is being spammed, finally giving the user what it wanted");
-				}
-				_number = 0;
-				_again++
-				localStorage["preferred_option"] = mode
-				setStatus();
-				return;
-			}
-		}
+	switch(selectedOption){
+		case savedSetting:
+			console.log("Selected Option is already saved. Reset the form.");
+			setForm(selectedOption);
+			return;
+		case GEOCACHE_OPTION:
+			setForm(GEOCACHE_OPTION);
+			break;
+		case TRACKABLE_OPTION:
+			setForm(TRACKABLE_OPTION);
+			break;
+		default:
+			//Invalid Selected Option
+			console.error("Invalid Option In Selection Menu: " + selectedOption)
+			setStatus("ERROR");
+			return;
 	}
-	else if (mode == "trackable" || mode == "geocache") //checks if you didn't fuck with the HTML
-	{
-		//this is the actual code that will run when you click the Save/Set button (or when you change the option)
-		_number = 0;
-		localStorage["preferred_option"] = mode
-		setStatus();
-		//Updates HTML stuff
-		if (mode == "geocache")
-		{
-			setGC();
-			console.log("Changed Attributes to Geocache");
-		}
-		else if (mode == "trackable")
-		{
-			setTB();
-			console.log("Changed Attributes to Trackable");
-		}
-		else //impossible to get here as we already checked for this error
-		{
-			//100% impossible to get here
 
-		}
-	}
-	else //You or something else has fucked with the HTML
-	{
-
-	}
+	getOrSetOptionToStorage(selectedOption);
+	setStatus();
+	return;
 }
 
 
+function setFormFromStorage() {
+	const SAVED_OPTION = getOrSetOptionToStorage();
+	switch (SAVED_OPTION) {
+		case GEOCACHE_OPTION:
+			setForm(GEOCACHE_OPTION);
+			break;
+		case TRACKABLE_OPTION:
+			setForm(TRACKABLE_OPTION);
+			break;
+		default:
+			console.log("No Valid Option to Restore: " + SAVED_OPTION + "\nSetting to DEFAULT_OPTION: " + DEFAULT_OPTION);
+			getOrSetOptionToStorage(DEFAULT_OPTION);
+			setForm(DEFAULT_OPTION);
+			break;
+	}
 
-//restores options
-function restore_options() {
-  var favorite = localStorage["preferred_option"];
-  if (favorite == "geocache")
-	{
-		setGC();
-//		console.log("Changed Form Values to Geocache as per Setting")
-	}
-	else if (favorite == "trackable")
-	{
-		setTB();
-//		console.log("Changed Attributes to Trackable as per Setting");
-	}
-	else if (typeof favorite === 'undefined')
-	{
-		setTB();
-		console.log("No current setting set, changed Attributes to Trackable");
-		localStorage["preferred_option"] = "trackable";
-	}
-	else
-	{
-		setTB();
-		console.warn('Warning: localStorage responded with unknown variable: "' + favorite + '" Attributes where changed to trackable');		
-		localStorage["preferred_option"] = "trackable";
-		//lets update the status
-		setStatus("Error Resolved", 5000);
-	}
-  if (!favorite) {
-    return;
-  }
-  var select = getId("mode-option");
-  for (var i = 0; i < select.children.length; i++) {	//It sets the drop down menu to what you set it to
-    var child = select.children[i];
-    if (child.value == favorite) {
-      child.selected = "true";
-      break;
-    }
-  }
 }
 
-//The following are the incredibly important HTML setting functions
-function setGC()
-{
-	var element = getId("form");
-	var element = getId("InputText");
-	element.setAttribute('placeholder', chrome.i18n.getMessage("InputTextGC_html"));
-	element.setAttribute('title', chrome.i18n.getMessage("TitleGC_html"));
-}
-function setTB()
-{
-	var element = getId("form");
-	var element = getId("InputText");
-	element.setAttribute('placeholder', chrome.i18n.getMessage("InputTextTB_html")); 
-	element.setAttribute('title', chrome.i18n.getMessage("TitleTB_html"));
+/**
+ * Set Form HTML for Different Options
+ * @param {string} option - Must be a valid OPTION constant
+ */
+function setForm(option) {
+	var inputBox = document.getElementById("InputText");
+	switch (option){
+		case GEOCACHE_OPTION:
+			inputBox.setAttribute('placeholder', chrome.i18n.getMessage("InputTextGC_html"));
+			inputBox.setAttribute('title', chrome.i18n.getMessage("TitleGC_html"));
+			break;
+		case TRACKABLE_OPTION:
+			inputBox.setAttribute('placeholder', chrome.i18n.getMessage("InputTextTB_html")); 
+			inputBox.setAttribute('title', chrome.i18n.getMessage("TitleTB_html"));
+			break;
+		default:
+			console.error("No Valid Option Given For setForm Function: " + option)
+			return;
+	}
+
+	//Reset Drop down box
+	var select = document.getElementById("mode-option");
+  		for (var i = 0; i < select.children.length; i++) {	//It sets the drop down menu to what you set it to
+    	var child = select.children[i];
+    	if (child.value == option) {
+      		child.selected = "true";
+      		break;
+    	}
+  	}
+
+	return;
+
 }
 
-/*Sence we use the getElementById method a lot, lets turn it into a function*/
-function getId(id)
-{
-	return document.getElementById(id);
-}
 
 /*Function for Status Message*/
 
@@ -196,7 +164,7 @@ function setStatus(message, duration)
 	/*The Code is designed so if you leave both variables blank
 	it will display the normal "Saved Options" message*/
 
-	var status = getId("status");
+	var status = document.getElementById("status");
 	var statushtml = status.innerHTML;
 	
 	if(statushtml == message || typeof message === 'undefined' && statushtml == chrome.i18n.getMessage("Status_html"))
@@ -283,29 +251,28 @@ function fade(elem, dur)
 
 /**
  * Handles the search
- * @param {string} gcCode - The search box input.
+ * @param {string} input - The search box input.
  */
 function search(input){
-	const geocacheUrl   = "https://www.geocaching.com/geocache/";
-	const trackableUrl  = "https://www.geocaching.com/track/details.aspx?tracker=";
 	const searchText    = input.trim(); //trim the whitespace for good measure
-	const currentOption = localStorage["preferred_option"];
+	const CURRENT_OPTION = getOrSetOptionToStorage();
 	var searchUrl       = "";
 	//Check if it's a geocache or trackable
-	if(currentOption == "geocache"){
-		//Search for GC
-		searchUrl = geocacheUrl + searchText;
-		console.log("Opening Geocache Page to: " + searchUrl)
+	switch(CURRENT_OPTION) {
+		case GEOCACHE_OPTION:
+			searchUrl = GEOCACHE_SEARCH_URL + searchText;
+			console.log("Opening Geocache Page to: " + searchUrl)
+			break;
+		case TRACKABLE_OPTION:
+			searchUrl = TRACKABLE_SEARCH_URL + searchText;
+			console.log("Opening Trackable Page to: " + searchUrl)
+			break;
+		default:
+			//Error
+			console.error("Invalid Option: " + CURRENT_OPTION)
+			return;
 	}
-	else if(currentOption == "trackable"){
-		searchUrl = trackableUrl + searchText;
-		console.log("Opening Trackable Page to: " + searchUrl)
-	}
-	else {
-		//Error
-		console.error("Invalid Option Occured When Parsing Current Option in Search Function: " + currentOption)
-		return;
-	}
+
 	chrome.tabs.create({
 		url: searchUrl
 	});
@@ -315,8 +282,8 @@ function search(input){
 /* Event Listeners */
 
 document.addEventListener('DOMContentLoaded', () => {
-	restore_options();
-	document.querySelector("#mode-option").addEventListener('change', save_options);
+	setFormFromStorage();
+	document.querySelector("#mode-option").addEventListener('change', saveOptions);
 	document.querySelector("#InputText").addEventListener('blur', function (){document.getElementById("InputText").focus();}); 
 	//The above is so the input box ALWAYS has focus
 	document.getElementById("form").addEventListener('submit', (event) => {

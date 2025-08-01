@@ -5,7 +5,34 @@
  * http://developer.chrome.com/extensions/event_pages.html
  */
 
-//var selectedText;
+
+/**
+ * The URL prefix for searching GC codes
+ * @constant
+ * @type {string}
+ */
+const GEOCACHE_SEARCH_URL  = "https://www.geocaching.com/geocache/";
+
+/**
+ * The URL prefix for searching TB codes
+ * @constant
+ * @type {string}
+ */
+const TRACKABLE_SEARCH_URL = "https://www.geocaching.com/track/details.aspx?tracker=";
+
+/**
+ * Geocache Option ID
+ * @constant
+ * @type {string}
+ */
+const GEOCACHE_OPTION = "geocache"
+
+/**
+ * Trackable Option ID
+ * @constant
+ * @type {string}
+ */
+const TRACKABLE_OPTION = "trackable"
 
 /**runAnalyticsEvent
  * @param {string} eventName - Name of the Event.
@@ -83,62 +110,55 @@ async function runAnalyticsEvent(eventName, eventID) {
 	);
 }
 
+/**
+ * Context Menu Click Handler. Refer to API documention
+ * https://developer.chrome.com/docs/extensions/reference/api/contextMenus
+ * @param {*} info 
+ * @param {*} tab 
+ * @returns 
+ */
 async function onClickHandler(info, tab) {
+	const selectedOption = info.menuItemId;
+	const selectedText   = info.selectionText;
+	if(selectedText.match(/^[a-zA-Z0-9]+$/)) {
+		//Well, it's not garabge. We'll process the input.
+		if (selectedOption == GEOCACHE_OPTION) {
+			var url = GEOCACHE_SEARCH_URL + selectedText;
+		}
+		else if (selectedOption == TRACKABLE_OPTION) {
+			var url = TRACKABLE_SEARCH_URL + selectedText;
+		}
+		else {
+			console.error("Invalid Contaxt Menu Option: " + selectedOption)
+		}
+	}
+	else {
+		console.log("Invalid Text Selected: " + selectedText)
+		return;
+	}
 
 	//Run some Analytics
-	runAnalyticsEvent("onClickHandler", info.menuItemId)
-	
-	if (info.menuItemId == "GC") {
-		//GC Click Handler
-		
-		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
-			var url = 'https://www.geocaching.com/seek/cache_details.aspx?wp=' + info.selectionText;
-			//opens new tab 
-			chrome.tabs.create({
-				url: url
-			});
-			return;
-		}
-		else
-		{
-			return;
-			
-		}	
-	}
-	if(info.menuItemId == "TB") {
-		//TB click handler
-		
-		/*Checking if you just selected useless garbage*/
-		if (info.selectionText.match(/^[a-zA-Z0-9]+$/)) {
-			var url = 'https://www.geocaching.com/track/details.aspx?tracker=' + info.selectionText;
-			//opens new tab 
-			chrome.tabs.create({
-				url: url
-			});
-			return;
-		}
-		else
-		{
-			return;
-		} 
-	}
-};
+	runAnalyticsEvent("onClickHandler", selectedOption)
+
+	chrome.tabs.create({
+		url: url
+	});
+}
 
 function Startup() {
 	chrome.contextMenus.create({
 	 "title":chrome.i18n.getMessage("InputTextGC_html"),
 	  "contexts":["selection"],
-	  "id": "GC",
+	  "id": GEOCACHE_OPTION,
 	});  
 	chrome.contextMenus.create({
-	  "title":"Trackable",
+	  "title":chrome.i18n.getMessage("InputTextTB_html"),
 	  "contexts":["selection"],
-	  "id": "TB",
+	  "id": TRACKABLE_OPTION,
 	});
 	
 	//Setting up some initial settings
 	chrome.storage.local["identified_language"] = chrome.runtime.getManifest().current_locale;
-	chrome.storage.local["preferred_option"] = "trackable";
 
 	//Analytics Startup
 	runAnalyticsEvent("onInstalled", "Startup")
