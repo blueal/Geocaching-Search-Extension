@@ -55,23 +55,40 @@ const OPTION_STORAGE_LOCATION = "preferred_option"
 var _DefaultFadeDelay = 2400;
 
 // Saves options to localStorage.
-
-async function getOrSetOptionToStorage(option){
-	if(option !== null && option !== undefined && option !== '') {
-		await chrome.storage.local.set({"preferred_option": option});
-	}
-	return await chrome.storage.local.get(["preferred_option"]);
+/**
+ * Manages Saved Option storage and retrieval using the `chrome.storage.sync` API.
+ * This function can act as both a getter and a setter.
+ * @async
+ * @function getOrSetOptionToStorage
+ * @param {string} option 
+ * @returns {Promise<string|void>} - MUST USE AWAIT, returns current saved option as string that must be resolved from a promise object
+ */
+async function getOrSetOptionToStorage(option) {
+    if (option !== null && option !== undefined && option !== '') {
+        await chrome.storage.sync.set({ [OPTION_STORAGE_LOCATION]: option });
+    }
+    const result = await chrome.storage.sync.get(OPTION_STORAGE_LOCATION);
+    return result[OPTION_STORAGE_LOCATION];
 }
 
-function saveOptions() {
-	select = document.getElementById("mode-option");
-	var selectedOption = select.children[select.selectedIndex].value;
-	//selectedOption = document.getElementById("mode-option").select.children[select.selectedIndex].value;
-	const savedSetting = getOrSetOptionToStorage();
+/**
+ * Saves the currently selected option from the dropdown menu to Chrome storage.
+ * Updates the form UI based on the selected option and displays a status message.
+ * If the selected option is invalid, reloads the extension.
+ * If the selected option is already set, resets the form without saving.
+ *
+ * @async
+ * @function saveOptions
+ * @returns {Promise<void>} Resolves when the option is saved and the form/status are updated.
+ */
+async function saveOptions() {
+	const select         = document.getElementById("mode-option");
+	const selectedOption = select.children[select.selectedIndex].value;
+	const currentSetting = await getOrSetOptionToStorage();
 
 	switch(selectedOption){
-		case savedSetting:
-			console.log("Selected Option is already saved. Reset the form.");
+		case currentSetting:
+			console.log("Selected Option: " + selectedOption + " is already set to " + currentSetting + " Reset the form.");
 			setForm(selectedOption);
 			return;
 		case GEOCACHE_OPTION:
@@ -81,34 +98,52 @@ function saveOptions() {
 			setForm(TRACKABLE_OPTION);
 			break;
 		default:
-			//Invalid Selected Option
+			//Invalid Selected Option. HTML is broken.
 			console.error("Invalid Option In Selection Menu: " + selectedOption)
-			setStatus("ERROR");
+			chrome.runtime.reload()
 			return;
 	}
-
-	getOrSetOptionToStorage(selectedOption);
+	console.log("Set Form to: " + selectedOption);
+	await getOrSetOptionToStorage(selectedOption);
+	console.log("Saved Option: " + selectedOption + " to storage.");
 	setStatus();
 	return;
 }
 
-
-function setFormFromStorage() {
-	const SAVED_OPTION = getOrSetOptionToStorage();
-	switch (SAVED_OPTION) {
-		case GEOCACHE_OPTION:
-			setForm(GEOCACHE_OPTION);
-			break;
-		case TRACKABLE_OPTION:
-			setForm(TRACKABLE_OPTION);
-			break;
-		default:
-			console.log("No Valid Option to Restore: " + SAVED_OPTION + "\nSetting to DEFAULT_OPTION: " + DEFAULT_OPTION);
-			getOrSetOptionToStorage(DEFAULT_OPTION);
-			setForm(DEFAULT_OPTION);
-			break;
+/**
+ * Restores the form state from storage by retrieving the saved option.
+ * Sets the form based on the retrieved option, or defaults to DEFAULT_OPTION if no valid option is found.
+ * Handles errors during retrieval and logs them to the console.
+ *
+ * @async
+ * @function setFormFromStorage
+ * @returns {Promise<void>} Resolves when the form state has been set.
+ */
+async function setFormFromStorage() {
+	try{
+		const SAVED_OPTION = await getOrSetOptionToStorage();
+		switch (SAVED_OPTION) {
+			case GEOCACHE_OPTION:
+				setForm(GEOCACHE_OPTION);
+				break;
+			case TRACKABLE_OPTION:
+				setForm(TRACKABLE_OPTION);
+				break;
+			default:
+				console.log("No Valid Option to Restore: " + SAVED_OPTION + "\nSetting to DEFAULT_OPTION: " + DEFAULT_OPTION);
+				await getOrSetOptionToStorage(DEFAULT_OPTION);
+				setForm(DEFAULT_OPTION);
+				break;
+		}
+		return;
 	}
-
+	catch (error) {
+		console.warn("Failed to retrieve SAVED OPTION: " + error)
+		//If we can't get the saved option, just set it to the default. Assume storage is not broken.
+		await getOrSetOptionToStorage(DEFAULT_OPTION);
+		setForm(DEFAULT_OPTION);
+		return;
+	}
 }
 
 /**
@@ -252,11 +287,12 @@ function fade(elem, dur)
 /**
  * Handles the search
  * @param {string} input - The search box input.
+ * @returns {Promise<void>} Resolves when the search is handled.
  */
-function search(input){
-	const searchText    = input.trim(); //trim the whitespace for good measure
-	const CURRENT_OPTION = getOrSetOptionToStorage();
-	var searchUrl       = "";
+async function search(input){
+	const searchText     = input.trim(); // Removes leading and trailing whitespace from input
+	const CURRENT_OPTION = await getOrSetOptionToStorage();
+	var searchUrl        = "";
 	//Check if it's a geocache or trackable
 	switch(CURRENT_OPTION) {
 		case GEOCACHE_OPTION:

@@ -147,12 +147,12 @@ async function onClickHandler(info, tab) {
 
 function Startup() {
 	chrome.contextMenus.create({
-	 "title":chrome.i18n.getMessage("InputTextGC_html"),
+	 "title":"GC",
 	  "contexts":["selection"],
 	  "id": GEOCACHE_OPTION,
 	});  
 	chrome.contextMenus.create({
-	  "title":chrome.i18n.getMessage("InputTextTB_html"),
+	  "title":"TB",
 	  "contexts":["selection"],
 	  "id": TRACKABLE_OPTION,
 	});
