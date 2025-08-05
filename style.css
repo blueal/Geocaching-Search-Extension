@@ -82,6 +82,7 @@ span#status{
 	color:#777;
 	font-style:italic;
 	float:right;
+    transition: opacity 0.8s ease;
 }
 
 /* Ye Old Footer, visible in the early versions
@@ -190,4 +191,7 @@ div#selected{
 }
 .error#selectedtext{
 	color:#FF0000!important;
+}
+.fade-out {
+    opacity: 0;
 }
