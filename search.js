@@ -1,12 +1,3 @@
-/*Persistent Global Variables for SetStatus
-* TODO: Rewrite this function so I don't have to use these annoying variables.
-*/
-var _number = 0,
-_again = 15,
-_REPEAT = false,
-_running = false,
-_duration;
-
 /**
  * The URL prefix for searching GC codes
  * @constant
@@ -48,11 +39,6 @@ const DEFAULT_OPTION = TRACKABLE_OPTION
  * @type {string}
  */
 const OPTION_STORAGE_LOCATION = "preferred_option"
-
-
-
-/*Static Variables*/
-var _DefaultFadeDelay = 2400;
 
 // Saves options to localStorage.
 /**
@@ -147,8 +133,12 @@ async function setFormFromStorage() {
 }
 
 /**
- * Set Form HTML for Different Options
- * @param {string} option - Must be a valid OPTION constant
+ * Updates the input box and dropdown menu based on the selected option.
+ *
+ * Sets the placeholder and title of the input box according to the provided option,
+ * and updates the dropdown menu selection to match the option.
+ *
+ * @param {string} option - The selected option, expected to be either GEOCACHE_OPTION or TRACKABLE_OPTION.
  */
 function setForm(option) {
 	var inputBox = document.getElementById("InputText");
@@ -181,107 +171,46 @@ function setForm(option) {
 }
 
 
-/*Function for Status Message*/
+/**
+ * Displays a status message in the element with id "status" and fades it out after a specified duration.
+ *
+ * @param {string} [message] - The message to display. If omitted, uses a localized default message.
+ * @param {number} [duration] - Duration in milliseconds before the message fades out. Defaults to 2400ms.
+ * @returns {void} Resolves when the status message is displayed and the timer is set.
+ */
+function setStatus(message, duration) {
+	const DEFAULT_DURATION = 2400; // Default duration for fade out in milliseconds
+    const DEFAULT_MESSAGE = chrome.i18n.getMessage("Status_html");
+	const status = document.getElementById("status");
+    const msg = typeof message === 'undefined' ? DEFAULT_MESSAGE : message;
+    const fadeDelay = typeof duration === 'undefined' ? DEFAULT_DURATION : duration; // Default to 2 seconds
 
-/*Execution Logic For Status Message
-* 
-*Display a message Using setStatus(message, duration);
-*If that exact message is already being displayed it will just
-*reset the fade to the new duration you specified.
-*If you don't specify a duration, it will use the default which is defined on line 22
-*If you also don't specify a message, it uses the "Option Saved" message
-*If you set a new message and one is already being displayed, it will reset everything and 
-*display the new message for the duration you sepcify.
-*/
+    // Reset fade and timer
+    status.classList.remove('fade-out');
+    clearTimeout(status._fadeTimeout);
 
-function setStatus(message, duration)
-{
-	/*The Code is designed so if you leave both variables blank
-	it will display the normal "Saved Options" message*/
+    // Set message
+    status.innerHTML = msg;
 
-	var status = document.getElementById("status");
-	var statushtml = status.innerHTML;
-	
-	if(statushtml == message || typeof message === 'undefined' && statushtml == chrome.i18n.getMessage("Status_html"))
-	{
-		//That Message Is already being displayed, reset the timer
-		_duration = duration;
-		_REPEAT = true;
-		return "Timer Reset";
-	}
-	/*Message Content*/
-	if(typeof message === 'undefined')
-	{
-		status.innerHTML = chrome.i18n.getMessage("Status_html");
-	}
-	else
-	{
-		status.innerHTML = message;
-	}
+    // Remove any previous transitionend handler
+    status.removeEventListener('transitionend', status._fadeHandler);
 
-	/*Duration of Messgae*/
-	if(_running == true)
-	{
-		//A message is already being displayed. Stop it, and set a new duration
-		_duration = duration;
-		_REPEAT = true;
-		return "New Message Is Being Displayed, and Timer Has Been Reset";
-	}
-	else
-	{
-		//Fresh new message, lets set the timer
-		fade(status, duration);
-		return "Message Is Being Displayed and Timer Is Set";
-	}
+    // Define and store the handler so it can be removed later
+    status._fadeHandler = function(e) {
+        if (e.propertyName === 'opacity') {
+            status.innerHTML = "";
+            status.classList.remove('fade-out');
+            status.removeEventListener('transitionend', status._fadeHandler);
+        }
+    };
 
-}
+    // Start fade after delay
+    status._fadeTimeout = setTimeout(() => {
+        status.addEventListener('transitionend', status._fadeHandler);
+        status.classList.add('fade-out');
+    }, fadeDelay);
 
-
-/*Status Message Fade Out*/
-function fade(elem, dur)
-{
-	_running = true;
-	if(typeof dur === 'undefined')
-	{
-		dur = _DefaultFadeDelay;
-	}
-	elem.style.opacity = 1;
-
-	//Lets wait a bit before we start fading
-	setTimeout(function(){
-		(function go(){
-			if(_REPEAT == true)
-			{
-				//STOP EVERYTHING! We need to start the fade over again
-				_REPEAT = false;
-				fade(elem, _duration);
-				return;
-			}
-			//Increment Opacity Down .03
-			if(elem.style.opacity > .3){	//You can't go below 0
-				elem.style.opacity = (elem.style.opacity - .3)
-				//Fading isn't finished, keep fading
-				setTimeout( go, 100 );
-	
-			}
-			else if(elem.style.opacity > .05 && elem.style.opacity < .3)
-			{
-				//Keep going at a smaller rate to make it a smooth fade
-				elem.style.opacity = (elem.style.opacity - .05)
-				setTimeout(go, 100);
-			}
-			else
-			{
-				//Done Fading, do some clean-up then exit function
-				elem.innerHTML = "";
-				elem.removeAttribute("style");
-				_duration = "";
-				_running = false;
-				return;
-			}
-		})();
-	}, dur);
-	return;
+    return;
 }
 
 /**
